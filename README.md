@@ -4,7 +4,7 @@
 
 These API's can be called by yourself or by the MediaEngine (by default):
 
-#Inject Mode :
+#Inject Mode 
 
 * Manual : 
 
@@ -35,3 +35,23 @@ You don't need an ID to initialize a player, but a dom element is required. Medi
     where   : dom element, the player will replace it
     type    : string, can be "jwplayer, dmplayer or ytplayer"
     options : object, player options, each option override the default one
+
+options.callback : A callback can be attached within options, return an object.
+
+    options.callback = function(obj) {
+        obj.api       // player API
+        obj.events    // player events
+    };
+
+you can then attach a custom event, see API's Events.
+
+    obj.events.addListener('onPlay', function(e, args){
+        e.type  // event name
+        args    // player event arguments
+    });
+    
+..call a specific native API method..
+
+    obj.api.methodName();
+    
+...or attach a specific native API event regarding the way you have to bind it !

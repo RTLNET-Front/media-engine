@@ -160,3 +160,39 @@ This method is not supported in Dailymotion player
     MediaEngine.isMuted('playerId');
 
 **Infos** : - 'playerId' argument is the ID passed into the 'where' argument when calling MediaEngine.initPlayer().
+
+#Config	
+MediaEngine has a default config which is accessible to:
+
+    MediaEngine.config;
+
+This config store an object for each API. Each object can contain the following params:
+
+####Defaults API's Options:
+You can easily modifying or accessing to the default options. Data object structure is the same has native API.
+
+*Example for the Dailymotion API default options:*
+
+    MediaEngine.config.DMPlayer.defaultOptions; // access
+    MediaEngine.config.DMPlayer.defaultOptions.params.autoplay = 1; // override
+
+####API Path:
+You can easily modifying or accessing to the default API path. This only works when 'inject mode' is enabled.
+
+*Example for the Dailymotion API path:*
+
+    MediaEngine.config.DMPlayer.api.path = 'http://my-new-api-path/'; // new path API
+
+#####Default API Paths:
+* JWPLayer :    'jwplayer/jwplayer-6.7.4227/jwplayer.js'
+* DailyMotion: '//api.dmcdn.net/all.js'
+* YouTube:     '//www.youtube.com/iframe_api'
+
+####API Inject Mode (true by default):
+You can choose to inject by yourself the API.
+
+*Example for the Dailymotion API:*
+
+    MediaEngine.config.DMPlayer.api.inject = false; // Manual mode, API isn't injected
+
+    MediaEngine.config.DMPlayer.api.inject = true;  // Auto mode, API is injected by MediaEngine if needed

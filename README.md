@@ -84,3 +84,79 @@ Unlike options, MediaEngine tries to makes all API's events common. Each event f
 ####All Commons API's events are:
 
     ['onReady', 'onPlay', 'onPause', 'onComplete', 'onError']
+
+#media-engine Events	
+
+A global dispatcher fire all API's custom events listed above, example:
+
+    MediaEngine.events.addListener(['APICustomEvent'], function(e, type, api, args){
+        e       // APICustomEvent event ex :{type: "onPlay", target: EventCustom} 
+        type    // event player name ex : "JWPlayer"
+        api     // player API
+        args    // player event arguments
+    });
+    
+example:
+
+    MediaEngine.events.addListener('onPlay', function(e, type, api, args){
+        // ..all API's 'play' events are fired here
+    });
+Other events fired:
+
+    ['onJwpAPIReady']      // Fired when the JWPlayer API is loaded and ready.
+    ['onDailyAPIReady']    // Fired when the Dailymotion API is loaded and ready.
+    ['onYoutubeAPIReady']  // Fired when the Youtube API is loaded and ready.
+**Infos** : - These events aren't fired in api 'inject' mode, see API's section.
+
+#media-engine Methods	
+
+MediaEngine has also his own methods too, listed below.
+If you need more specific API method not listed here, you can attach methods from the API within the player initialization callback, see player instantiation.
+
+**play(string)**    //Play the player.
+
+    MediaEngine.play('playerId');
+
+**pause(string)**   //Pause the player.
+
+    MediaEngine.pause('playerId');
+
+**stop(string)** //Stops the player and unloads the currently playing media file. *This method is not supported in Dailymotion player*
+
+    MediaEngine.stop('playerId');
+
+**seek(string,number)** // Jump to the specified position within the currently playing item. The position is required and must be provided as an integer, in seconds.
+
+    MediaEngine.seek('playerId', position);
+
+**mute(string,boolean)** //Change the player's mute state (no sound). Mute the player if true, and unmute if false.
+
+    MediaEngine.mute('playerId', state);
+
+**setVolume(string, number)** //Sets the player's audio volume percentage, as a number between 0 and 100.
+
+    MediaEngine.setVolume('playerId', volume);
+
+**getDuration(string)** // Returns the duration in seconds of the currently playing video. Note that getDuration() will return -1 until the video's metadata is loaded.
+This method is not supported in Dailymotion player
+
+    MediaEngine.getDuration('playerId');
+
+**getPosition(string)** // Returns the current playback position in seconds, as a number.
+This method is not supported in Dailymotion player
+
+    MediaEngine.getPosition('playerId');
+
+**getVolume(string)** //Returns the player's current volume, an integer between 0 and 100. Note that getVolume() will return the volume even if the player is muted. *This method is not supported in Dailymotion player*
+
+    MediaEngine.getVolume('playerId');
+
+**getItemMeta(string)** //Returns the current playing item object metadatas.*This method is not supported in Dailymotion player*
+
+    MediaEngine.getItemMeta('playerId');
+
+**isMuted(string)** // Returns true if the player is muted, false if not.*This method is not supported in Dailymotion player*
+
+    MediaEngine.isMuted('playerId');
+
+**Infos** : - 'playerId' argument is the ID passed into the 'where' argument when calling MediaEngine.initPlayer().

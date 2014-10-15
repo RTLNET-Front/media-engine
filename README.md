@@ -55,3 +55,32 @@ you can then attach a custom event, see API's Events.
     obj.api.methodName();
     
 ...or attach a specific native API event regarding the way you have to bind it !
+
+
+#media-engine Events API
+
+
+Unlike options, MediaEngine tries to makes all API's events common. Each event fired by the MediaEnigine is custom and based on the native API event.
+
+* All of these options can be attached within the global MediaEngine Events Dispatcher. 
+* All of these events are not natives from the API, they are custom.
+
+####JWPlayer Custom Events :
+
+    ['onReady','onSetupError','onPlaylist','onPlaylistItem','onPlaylistComplete','onBufferChange','onPlay','onPause','onBuffer','onIdle','onComplete','onError','onSeek','onMute','onVolume','onFullscreen','onResize','onQualityLevels','onQualityChange','onCaptionsList','onCaptionsChange','onControls','onDisplayClick','onAdClick','onAdCompanions','onAdComplete','onAdError','onAdImpression','onAdSkipped','onBeforePlay','onBeforeComplete','onMeta']
+    
+**Infos** : natives events 'onTime' and 'onAdTime' are not fired by default because of recursive calls, there is no custom event fired for these events.
+
+####Dailymotion Custom Events
+
+    ['onReady', onPlay','onPlaying','onPause','onComplete','onCanplay','onCanplaythrough','onProgress','onSeeking','onSeek','onVolume','onDurationchange','onFullscreenchange','onError']
+
+**Infos** : native event 'onTimeupdate' isn't fired by default because of recursive calls, there is no custom event fired for it.
+
+####Youtube Custom Events
+
+    ['onReady','onIdle','onPlay','onPause','onBuffer','onCued','onComplete', onStateChange','onPlaybackQualityChange','onPlaybackRateChange', 'onError', 'onApiChange']
+
+####All Commons API's events are:
+
+    ['onReady', 'onPlay', 'onPause', 'onComplete', 'onError']

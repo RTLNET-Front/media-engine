@@ -196,3 +196,83 @@ You can choose to inject by yourself the API.
     MediaEngine.config.DMPlayer.api.inject = false; // Manual mode, API isn't injected
 
     MediaEngine.config.DMPlayer.api.inject = true;  // Auto mode, API is injected by MediaEngine if needed
+    
+#Advertising	
+
+** *JWPlayer Only* **
+
+* A pre-roll and a post-roll tag can be added to JWPlayer. 
+
+        jwPlayerOptions.ads = {
+            'preroll': 'yourtag.xml',
+            'postroll': 'yourtag.xml'
+        };
+
+* **disableAds=false**  // false by default
+    
+Within the Config, it's possible to disable all JWPlayer ads once (even ads tags are set in options) by editing the following boolean:
+
+    MediaEngine.config.JWPlayer.disableAds = true;
+    
+#eStat	
+
+MediaEngine has one stream stats tools called "eStat".
+
+* eStat isn't called and loaded by the MediaEngine, you must call it by yourself. (Because of specifics params and specific way to implement it.) 
+* eStat is disabled by default.
+
+eStat levels
+- eStat levels aren't required but may be very useful for stats tracking.
+
+        {   
+        'eStatName'     : 'player_name',      // fallback to item filename if empty
+        'eStatSection1' : 'player_level_1',   // fallback to an empty string if empty
+        'eStatSection2' : 'player_level_2',   // fallback to an empty string if empty
+        'eStatSection3' : 'player_level_3',   // fallback to item type "AUDIO" or "VIDEO" if empty
+        'eStatSection4' : 'player_level_4',   // fallback to rendering mode "HTML5" or "FLASH" if empty
+        'eStatSection5' : 'player_level_5',   // fallback to an empty string if empty
+        'eStatGenre'    : 'player_genre'      // fallback to an empty string if empty
+        }
+
+####Add eStat within jwplayer:
+
+    jwPlayerOptions.eStat = {
+        'enabled' : true, // disable or enable eStat for this player
+        'live'  : true,   // enable/disable eStat live measurement for this player
+        'levels'  : {}    // custom eStat levels
+    };
+
+####Disable eStat (false by default)
+
+Within the Config, it's possible to disable eStat (even eStat is instantiated) for all players by editing the following boolean:
+
+    MediaEngine.config.eStat.disabled = true;
+
+** attachPendingPlayers()** // This method attach eStat for all pending players waiting for eStat API ready. This is useful when you don't control eStat and player orders loading event. If eStat is called synchonously and before players instantiation, you don't need to work with this method.
+
+** *Example* ** : You set a player with eStat but eStat isn't loaded yet. The player is instantiated and ready but eStat will keep this player in a queue for attaching it later by calling this method, when api is ready.
+
+    MediaEngine.eStat.attachPendingPlayers();
+    
+** attach(string, object) ** // This method attach eStat for a specific player.
+
+    MediaEngine.eStat.attach('playerId', levels); // eStat is now attached
+
+** detach(string)** // This method detach eStat for a specific player.
+
+    MediaEngine.eStat.detach('playerId'); // eStat is now removed
+
+** detachAll()** // This method detach eStat for all players within eStat attached
+
+    MediaEngine.eStat.detachAll(); // eStat is now removed from all players in current page
+
+Infos: - 'playerId' argument is the ID passed into the 'where' argument when calling MediaEngine.initPlayer().
+
+# Related Links	
+
+* JWPlayer Options : http://www.longtailvideo.com/support/jw-player/
+* JWPlayer Events : http://www.longtailvideo.com/support/jw-player/28851/javascript-api-reference
+* Dailymotion Options : http://www.dailymotion.com/doc/api/player.html
+* Dailymotion Events : http://www.dailymotion.com/doc/api/player.html
+* Youtube Options : https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
+* Youtube Events : https://developers.google.com/youtube/iframe_api_reference#Events

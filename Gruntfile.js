@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 		uglify: {
 			my_target: {
 				files: {
-					'dist/media-engine.js': ['src/*.js']
+					'dist/me.min.js': ['src/*.js']
 				}
 			},
 			options: {

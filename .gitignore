@@ -21,6 +21,5 @@ $RECYCLE.BIN/
 
 **/.sass-cache
 **/node_modules
-**/dist
 **/mongo
 .sublime-grunt.cache

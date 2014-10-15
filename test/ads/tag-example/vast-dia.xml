@@ -1,0 +1,41 @@
+<VAST version="2.0">
+<Ad id="152489bf-26ad-4bb7-9c7c-6281f59c783d">
+<InLine>
+<AdSystem>Videoplaza Karbon</AdSystem>
+<AdTitle>Preroll_Dia_RTL_2111</AdTitle>
+<Error>http://fr-m6.videoplaza.tv/proxy/tracker/v2?aid=0&amp;cf=short_form&amp;dcid=6b7a6960-8a8c-102f-9f01-001e4f3cd645&amp;e=0&amp;pid=936df83c-0c99-4774-af36-b6cab94165ea&amp;s=rtl_replay_jw&amp;t=rtl,m6bonus_web_pack_rg,m6bonus_web_pack_csp,m6bonus_web_pack_info&amp;tid=5699c921-538d-11e3-838d-002590c87e92&amp;tt=p&amp;ua=%5Bua%5D&amp;uc=%5Buc%5D</Error>
+<Impression>http://fr-m6.videoplaza.tv/proxy/tracker/v2?aid=152489bf-26ad-4bb7-9c7c-6281f59c783d&amp;cf=short_form&amp;dcid=6b7a6960-8a8c-102f-9f01-001e4f3cd645&amp;e=0&amp;pid=936df83c-0c99-4774-af36-b6cab94165ea&amp;s=rtl_replay_jw&amp;t=rtl,m6bonus_web_pack_rg,m6bonus_web_pack_csp,m6bonus_web_pack_info&amp;tid=5699c921-538d-11e3-838d-002590c87e92&amp;tt=p&amp;ua=%5Bua%5D&amp;uc=%5Buc%5D</Impression>
+<Impression>http://ad-emea.doubleclick.net/ad/N6600.145528.RTL.FR/B7587838.3;sz=1x1;ord=1382561672</Impression>
+<Creatives>
+<Creative id="video">
+<Linear>
+<Duration>00:00:20</Duration>
+<TrackingEvents>
+<Tracking event="midpoint">http://fr-m6.videoplaza.tv/proxy/tracker/v2?aid=152489bf-26ad-4bb7-9c7c-6281f59c783d&amp;cf=short_form&amp;dcid=6b7a6960-8a8c-102f-9f01-001e4f3cd645&amp;e=16&amp;pid=936df83c-0c99-4774-af36-b6cab94165ea&amp;s=rtl_replay_jw&amp;t=rtl,m6bonus_web_pack_rg,m6bonus_web_pack_csp,m6bonus_web_pack_info&amp;tid=5699c921-538d-11e3-838d-002590c87e92&amp;tt=p</Tracking>
+<Tracking event="complete">http://fr-m6.videoplaza.tv/proxy/tracker/v2?aid=152489bf-26ad-4bb7-9c7c-6281f59c783d&amp;cf=short_form&amp;dcid=6b7a6960-8a8c-102f-9f01-001e4f3cd645&amp;e=18&amp;pid=936df83c-0c99-4774-af36-b6cab94165ea&amp;s=rtl_replay_jw&amp;t=rtl,m6bonus_web_pack_rg,m6bonus_web_pack_csp,m6bonus_web_pack_info&amp;tid=5699c921-538d-11e3-838d-002590c87e92&amp;tt=p</Tracking>
+<Tracking event="start">http://fr-m6.videoplaza.tv/proxy/tracker/v2?aid=152489bf-26ad-4bb7-9c7c-6281f59c783d&amp;cf=short_form&amp;dcid=6b7a6960-8a8c-102f-9f01-001e4f3cd645&amp;e=14&amp;pid=936df83c-0c99-4774-af36-b6cab94165ea&amp;s=rtl_replay_jw&amp;t=rtl,m6bonus_web_pack_rg,m6bonus_web_pack_csp,m6bonus_web_pack_info&amp;tid=5699c921-538d-11e3-838d-002590c87e92&amp;tt=p</Tracking>
+<Tracking event="firstQuartile">http://fr-m6.videoplaza.tv/proxy/tracker/v2?aid=152489bf-26ad-4bb7-9c7c-6281f59c783d&amp;cf=short_form&amp;dcid=6b7a6960-8a8c-102f-9f01-001e4f3cd645&amp;e=15&amp;pid=936df83c-0c99-4774-af36-b6cab94165ea&amp;s=rtl_replay_jw&amp;t=rtl,m6bonus_web_pack_rg,m6bonus_web_pack_csp,m6bonus_web_pack_info&amp;tid=5699c921-538d-11e3-838d-002590c87e92&amp;tt=p</Tracking>
+<Tracking event="close">http://fr-m6.videoplaza.tv/proxy/tracker/v2?aid=152489bf-26ad-4bb7-9c7c-6281f59c783d&amp;cf=short_form&amp;dcid=6b7a6960-8a8c-102f-9f01-001e4f3cd645&amp;e=7&amp;pid=936df83c-0c99-4774-af36-b6cab94165ea&amp;s=rtl_replay_jw&amp;t=rtl,m6bonus_web_pack_rg,m6bonus_web_pack_csp,m6bonus_web_pack_info&amp;tid=5699c921-538d-11e3-838d-002590c87e92&amp;tt=p</Tracking>
+<Tracking event="thirdQuartile">http://fr-m6.videoplaza.tv/proxy/tracker/v2?aid=152489bf-26ad-4bb7-9c7c-6281f59c783d&amp;cf=short_form&amp;dcid=6b7a6960-8a8c-102f-9f01-001e4f3cd645&amp;e=17&amp;pid=936df83c-0c99-4774-af36-b6cab94165ea&amp;s=rtl_replay_jw&amp;t=rtl,m6bonus_web_pack_rg,m6bonus_web_pack_csp,m6bonus_web_pack_info&amp;tid=5699c921-538d-11e3-838d-002590c87e92&amp;tt=p</Tracking>
+</TrackingEvents>
+<VideoClicks>
+<ClickThrough>http://fr-m6.videoplaza.tv/proxy/tracker/v2?aid=152489bf-26ad-4bb7-9c7c-6281f59c783d&amp;cf=short_form&amp;dcid=6b7a6960-8a8c-102f-9f01-001e4f3cd645&amp;e=20&amp;pid=936df83c-0c99-4774-af36-b6cab94165ea&amp;redirect=http%3A%2F%2Fad-emea.doubleclick.net%2Fclk%3B271003740%3B97099104%3Bc&amp;s=rtl_replay_jw&amp;t=rtl,m6bonus_web_pack_rg,m6bonus_web_pack_csp,m6bonus_web_pack_info&amp;tid=5699c921-538d-11e3-838d-002590c87e92&amp;tt=p</ClickThrough>
+</VideoClicks>
+<MediaFiles>
+<MediaFile delivery="progressive" type="video/mp4" bitrate="841" width="640" height="360" scalable="true">http://videoplaza.cdn.m6web.fr/creatives/assets/a7df02d4-e142-4ace-b273-722303be1815/d24723b8-2bab-4ac4-bc18-8244e2b5d8b1.mp4</MediaFile>
+<MediaFile delivery="progressive" type="video/mp4" bitrate="624" width="640" height="360" scalable="true">http://videoplaza.cdn.m6web.fr/creatives/assets/a7df02d4-e142-4ace-b273-722303be1815/fee20dd8-b493-4758-939f-f2df8ef3ffec.mp4</MediaFile>
+<MediaFile delivery="progressive" type="video/mp4" bitrate="466" width="640" height="360" scalable="true">http://videoplaza.cdn.m6web.fr/creatives/assets/a7df02d4-e142-4ace-b273-722303be1815/2a449d22-87a7-450c-a9b9-15e3c17b1d7a.mp4</MediaFile>
+<MediaFile delivery="progressive" type="video/mp4" bitrate="341" width="480" height="270" scalable="true">http://videoplaza.cdn.m6web.fr/creatives/assets/a7df02d4-e142-4ace-b273-722303be1815/45f03b10-2118-43fd-9409-3c435a10c156.mp4</MediaFile>
+<MediaFile delivery="progressive" type="video/mp4" bitrate="210" width="320" height="180" scalable="true">http://videoplaza.cdn.m6web.fr/creatives/assets/a7df02d4-e142-4ace-b273-722303be1815/c76774e6-279d-420f-a930-726659a26551.mp4</MediaFile>
+</MediaFiles>
+</Linear>
+</Creative>
+</Creatives>
+<Extensions>
+<Extension type="AdServer" name="Videoplaza">
+<AdInfo gid="1596d60f-c57c-4652-bd98-4e514c5a7f15" customcid="10261" cid="f3d256c0-7d93-4d2c-a112-84c227827acb" format="spot_standard" variant="NORMAL" exclusive="false"></AdInfo>
+</Extension>
+</Extensions>
+</InLine>
+</Ad>
+</VAST>

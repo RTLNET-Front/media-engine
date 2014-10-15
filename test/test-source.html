@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="UTF-8">
+	
+	<title>media-engine demo</title>
+	
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="http://necolas.github.io/normalize.css/2.1.2/normalize.css">
+
+	<style type="text/css">
+
+		body {
+			text-align: center;
+		}
+
+		.player {
+			display: inline-block;
+			vertical-align: top;
+			width:30%;
+			margin:20px;
+			min-width: 300px;
+			text-align: left;
+		}
+
+		.player-16-9 {
+			position: relative;
+			padding-bottom: 56.25%;
+		}
+
+		.player-16-9 iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+		}
+
+		#clear {
+			display: inline-block;
+		}
+
+		#log {
+			font-size: 16px;
+			font-family: Georgia;
+		}
+
+	</style>
+
+
+</head>
+<body>
+
+	<div class="player">
+		<h1 class="js-player" id="player1" data-type="jwplayer" data-cover="http://www.longtailvideo.com/content/images/jw-player/lWMJeVvV-876.jpg" data-src="http://media.rtl.fr/online/sound/2014/0603/7772403211_l-auditrice-d-honneur-marie-alice.mp3" data-autoplay="false">JWPlayer Video Item</h1>
+	</div>
+
+	<div class="player">
+		<h1 class="js-player" data-type="jwplayer" data-cover="http://www.longtailvideo.com/content/images/jw-player/lWMJeVvV-876.jpg" data-src="http://icecast.rtl.fr/rtl-1-48-72.aac?type=.flv" data-autoplay="false" data-live="true">JWPlayer Live Item</h1>
+	</div>
+
+	<div class="player">
+		<div class="player-16-9">
+			<h1 class="js-player" id="player2" data-type="dmplayer" data-src="x17mpai" data-autoplay="false">Dailymotion Video Item</h1>
+		</div>
+	</div>
+
+	<div class="player">
+		<div class="player-16-9">
+			<h1 class="js-player" id="player3" data-type="ytplayer" data-src="M7lc1UVf-VE" data-autoplay="false">Youtube Video Item</h1>
+		</div>
+	</div> 
+	
+	<div>
+		<button id="clear">clear</button>
+		<button id="play">play</button>
+		<button id="pause">pause</button>
+		<button id="stop">stop</button>
+		<button id="seek">seek 60</button>
+		<button id="mute">mute</button>
+		<button id="unmute">unmute</button>
+		<button id="volume1">volume 20</button>
+		<button id="volume2">volume 80</button>
+		<button id="getDuration">getDuration</button>
+		<button id="getPosition">getPosition</button>
+		<button id="getVolume">getVolume</button>
+		<button id="getItemMeta">getItemMeta</button>
+		<button id="isMuted">isMuted</button>
+		<button id="callEstat">callEstat</button>
+		<button id="attachPendingPlayers">attachEstat All</button>
+		<button id="detachEstatAll">detachEstat All</button>
+		<button id="attachEstat">attachEstat on a specific player</button>
+		<button id="detachEstat">detachEstat on a specific player</button>
+	</div>
+
+	<div id="log"></div>
+	
+	<script src="../src/1.1.2/js/media-engine.js"></script>
+	<script>
+		MediaEngine.config.JWPlayer.api.path = 'jwplayer/jwplayer-6.9.4867/jwplayer.js';
+		//MediaEngine.config.JWPlayer.disableAds = true;
+	</script>
+
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	
+	<script>
+	
+		MediaEngine.events.addListener('onJwpAPIReady', function(e){
+			$('#log').append('<br>'+[e.type]);
+		});
+
+		MediaEngine.events.addListener('onDailyAPIReady', function(e){
+			$('#log').append('<br>'+[e.type]);
+		});
+
+		MediaEngine.events.addListener('onYoutubeAPIReady', function(e){
+			$('#log').append('<br>'+[e.type]);
+		});
+
+		MediaEngine.events.addListener('onReady', function(e, type, instance, args){
+			$('#log').append('<br>'+[e.type, type]);
+		});
+
+		MediaEngine.events.addListener('onPlay', function(e, type, instance, args){
+			$('#log').append('<br>'+[e.type, type]);
+		});
+
+		MediaEngine.events.addListener('onPause', function(e, type, instance, args){
+			$('#log').append('<br>'+[e.type, type]);
+		});
+
+		MediaEngine.events.addListener('onIdle', function(e, type, instance, args){
+			$('#log').append('<br>'+[e.type, type]);
+		});
+
+		MediaEngine.events.addListener('onSeek', function(e, type, instance, args){
+			$('#log').append('<br>'+[e.type, type]);
+		});
+
+		MediaEngine.events.addListener('onMute', function(e, type, instance, args){
+			$('#log').append('<br>'+[e.type, type]);
+		});
+
+		MediaEngine.events.addListener('onVolume', function(e, type, instance, args){
+			$('#log').append('<br>'+[e.type, type]);
+		});
+
+		$('.js-player').each(function(){
+
+			var _options = {},
+				_this = $(this),
+				_type = _this.attr('data-type'),
+				_autoplay = _this.attr('data-autoplay'),
+				_src = _this.attr('data-src');
+
+			switch( _type ) {
+				case 'jwplayer':
+					_options.image = _this.attr('data-cover');
+					_options.file = _src;
+					_options.autostart = _autoplay;
+					_options.eStat = {
+						'enabled' : true,
+						'levels': {
+							'eStatName' : _src,
+							'eStatSection1' : 'RTL',
+							'eStatSection2' : 'DIFFERE'
+						}
+					};
+					_options.ads = {
+						'preroll': 'http://fr-m6.videoplaza.tv/proxy/distributor/v2?s=rtl_replay_jw&tt=p&rt=vast_2.0&rnd={random}&pf=fl_11&t=shortform,web,pack_rg,pack_info,pack_csp,pack_rtlnet,rtl,rtl_replay_jw',
+						'postroll': 'http://fr-m6.videoplaza.tv/proxy/distributor/v2?s=rtl_replay_jw&tt=po&rt=vast_2.0&rnd={random}&pf=fl_11&t=shortform,web,pack_rg,pack_info,pack_csp,pack_rtlnet,rtl,rtl_replay_jw'
+					};
+					if(_this.attr('data-live')){
+						_options.eStat.live = true;
+						_options.callback = function(obj) {
+							obj.events.addListener("onPause", function(e, args) {
+					            obj.api.stop();
+					        });
+						};
+					}
+				break;
+				case 'dmplayer':
+					_options.videoid = _src;
+					_options.params = {
+						'autoplay' : _autoplay
+					};
+				break;
+				case 'ytplayer':
+					_options.videoid = _src;
+					_options.params = {
+						'autoplay' : _autoplay
+					};
+				break;
+			}
+
+			MediaEngine.initPlayer(this, _type, _options);
+
+		});
+
+		$('#clear').on('click', function(){
+			$('#log').empty();
+		});
+
+		var myId = 'player1';
+
+		$('#play').on('click', function(){
+			MediaEngine.play(myId);
+		});
+
+		$('#pause').on('click', function(){
+			MediaEngine.pause(myId);
+		});
+
+		$('#stop').on('click', function(){
+			MediaEngine.stop(myId);
+		});
+
+		$('#seek').on('click', function(){
+			MediaEngine.seek(myId, 60);
+		});
+
+		$('#mute').on('click', function(){
+			MediaEngine.mute(myId, true);
+		});
+
+		$('#unmute').on('click', function(){
+			MediaEngine.mute(myId, false);
+		});
+
+		$('#volume1').on('click', function(){
+			MediaEngine.setVolume(myId, 20);
+		});
+
+		$('#volume2').on('click', function(){
+			MediaEngine.setVolume(myId, 80);
+		});
+
+		$('#getDuration').on('click', function(){
+			if(MediaEngine.getDuration(myId)){
+				$('#log').append('<br>'+MediaEngine.getDuration(myId));
+			}
+		});
+
+		$('#getPosition').on('click', function(){
+			if(MediaEngine.getPosition(myId)){
+				$('#log').append('<br>'+MediaEngine.getPosition(myId));
+			}
+		});
+
+		$('#getVolume').on('click', function(){
+			if(MediaEngine.getVolume(myId)){
+				$('#log').append('<br>'+MediaEngine.getVolume(myId));
+			}
+		});
+
+		$('#getItemMeta').on('click', function(){
+			if(MediaEngine.getItemMeta(myId)){
+				$('#log').append('<br>'+MediaEngine.getItemMeta(myId).file);
+			}
+		});
+
+		$('#isMuted').on('click', function(){
+			if(MediaEngine.isMuted(myId) !== null){
+				$('#log').append('<br>'+MediaEngine.isMuted(myId));
+			}
+		});
+
+		$('#callEstat').on('click', function(){
+
+			window._PJS = 0;
+			window._cmsJS = 0;
+			window._eStatDS = 1;
+
+			(function() {
+			    var eS = document.createElement('script');
+			    eS.type = 'text/javascript';
+			    eS.async = true;
+			    eS.src = 'http://prof.estat.com/js/207070198520.js';
+			    var s = document.getElementsByTagName('script')[0];
+			    s.parentNode.insertBefore(eS, s);
+			})();
+
+			window.eStat_PJS = function() {
+			    eStat_id.serial("207070198520");
+			}
+
+			window.eStat_CMSJS = function() {
+				$('#log').append('<br>eStat API Ready');
+			};
+
+		});
+
+		$('#attachPendingPlayers').on('click', function(){
+			try {
+				MediaEngine.eStat.attachPendingPlayers();
+			}catch(e){}
+		});
+
+		$('#attachEstat').on('click', function(){
+			try {
+				MediaEngine.eStat.attach(myId, {
+						'eStatGenre' : 'new genre',
+						'eStatSection1' : 'new level 1',
+						'eStatSection2' : 'new level 2',
+						'eStatSection3' : 'new level 3',
+						'eStatSection4' : 'new level 4',
+						'eStatSection5' : 'new level 5'
+					}
+				);
+			}catch(e){
+				$('#log').append('<br>'+e);
+			}
+		});
+
+		$('#detachEstat').on('click', function(){
+			try {
+				MediaEngine.eStat.detach(myId);
+			}catch(e){}
+		});
+
+		$('#detachEstatAll').on('click', function(){
+			try {
+				MediaEngine.eStat.detachAll();
+			}catch(e){}
+		});
+
+	</script>
+
+</body>
+</html>

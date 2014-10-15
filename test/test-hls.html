@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="UTF-8">
+	
+	<title>media-engine demo</title>
+	
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" type="text/css" href="http://necolas.github.io/normalize.css/2.1.2/normalize.css">
+
+	<style type="text/css">
+
+		body {
+			text-align: center;
+		}
+
+		.player {
+			display: inline-block;
+			vertical-align: top;
+			margin:20px;
+			text-align: left;
+		}
+
+		.player-16-9 {
+			position: relative;
+			padding-bottom: 56.25%;
+		}
+
+		.player-16-9 iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+		}
+
+		#clear {
+			display: inline-block;
+		}
+
+		#log {
+			font-size: 16px;
+			font-family: Georgia;
+		}
+
+	</style>
+
+
+</head>
+<body>
+
+	<div class="player">
+		<h1 class="js-player" id="hls-player">JWPlayer Video Item</h1>
+	</div>
+
+	<a style="display:block;" href="http://hcache.rtl.fr/live/rtl-1.isml/rtl-1.m3u8">http://hcache.rtl.fr/live/rtl-1.isml/rtl-1.m3u8</a>
+	
+	<script src="jwplayer/jwplayer-6.10.4906/jwplayer.js"></script>
+
+	<script>
+
+		jwplayer("hls-player").setup({
+			primary: "flash",
+			androidhls: false,
+			advertising : {
+				client: 'vast',
+				skipoffset: 2,
+				skipmessage : 'XX',
+				skiptext: 'Ignorer',
+				admessage: 'Votre programme commence dans XX seconde(s)',
+				schedule: {
+					adbreak1: {
+						offset: 'pre',
+						tag: 'http://fr-m6.videoplaza.tv/proxy/distributor/v2?s=rtl_live_jw&tt=p&rt=vast_2.0&rnd={random}&pf=fl_11&t=shortform,web,pack_rg,pack_info,pack_csp,pack_rtlnet,rtl,rtl_live_jw'
+					}
+				}
+			},
+			playlist  : [
+				{
+					title: "RTL en direct",
+					mediaid: "live_stream_rtl",
+					image: "http://www.longtailvideo.com/content/images/jw-player/lWMJeVvV-876.jpg",
+					// Audio formats state https://developer.mozilla.org/en-US/Apps/Build/Manipulating_media/Cross-browser_audio_basics
+					sources: [
+						{
+							"file": "http://hcache.rtl.fr/live/rtl-1.isml/rtl-1.m3u8",
+							"type": "m3u8"
+						},
+						/*
+						 *  - FLASH
+						 *    Infos: "type":"flv" will cause image to disappears because jwplayer will treat it as a video
+						 */
+						{
+							"file": "http://icecast.rtl.fr/rtl-1-48-72.aac?type=.flv",
+							"type": "flv"
+						},
+						/*
+						 * 	- FLASH
+						 *	- HTML5: Firefox 26+, Chrome 6+, Safari 5+, IE9+
+						 */
+						{
+							"file": "http://streaming.radio.rtl.fr/rtl-1-44-64",
+							"type": "mp3"
+						},
+						{
+							"file": "http://streaming.radio.rtl.fr/rtl-1-44-128",
+							"type": "mp3"
+						},
+						/*
+						 *	- HTML5: Firefox[3.5-25], Chrome 6+, Opera 10.5+
+						 */
+						{
+							"file": "http://streaming.radio.rtl.fr/rtl-1-48-128.ogg"
+							//"type": "ogg" // setting a type hide the cover preview, dunno why.
+						}
+					]
+				}
+			]
+		});
+
+		
+	</script>
+
+</body>
+</html>

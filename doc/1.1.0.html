@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	
+	<meta charset="UTF-8">
+	<title>RTLnet Media Engine</title>
+
+	<style>
+	 	*	{
+			border:0;
+			margin:0;
+			padding:0;
+		}
+		body {
+			font-size:1em;
+		}
+		a {
+			text-decoration:none;
+		}
+		a:hover {
+			text-decoration:underline;
+		}
+		.table-wrap {
+			position:relative;
+			display:block;
+			overflow:hidden;
+			float:right;
+			width:60%;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			border:1px solid #CCC;
+			margin:50px 5% 5% 0;
+		}
+		.nav {
+			position:fixed;
+			top:50px;
+			left:5%;
+			width:25%;
+			font-family:Helvetica, Arial, sans-serif;
+			line-height:1.6;
+			z-index:1;
+			margin:0;
+		}
+		.nav a {
+			font-size:20px;
+		}
+		.main-title {
+			font-family:Helvetica, Arial, Verdana;
+			font-size:200%;
+		}
+		.sub-title {
+			font-family:Helvetica, Arial, Verdana;
+			font-size:100%;
+		}
+		table{
+			position:relative;
+			font-family:Helvetica, Arial, sans-serif;
+			color:#333;
+			padding:15px;
+			border-collapse: collapse;
+			width: 100%;
+			background-color:#FFF;
+			z-index:2;
+		}
+		tr {
+			border-bottom:1px solid #CCC;
+		}
+		tr:last-child {
+			border-bottom:0;
+		}
+		td, th {
+			text-align:left;
+			vertical-align:top;
+			padding:15px;
+			background-color:#FFF;
+			font-size:14px;
+			line-height:1.6;
+		}
+		.title {
+			font-size:24px;
+			color:#4183C4;
+			font-weight:bold;
+		}
+		.holder{
+			display:block;
+			overflow:hidden;
+			position:relative;
+			margin-bottom:5px;
+		}
+		.var{
+			display:inline;
+			color:#c0002c;
+			font-weight:bold;
+		}
+		.description{
+			display:inline;
+			color:blue;
+		}
+		ul, ol {
+		    padding-left: 30px;
+		}
+		a {
+		    color: #4183C4;
+		    text-decoration: none;
+		}
+		p,blockquote,ul,ol,dl,pre {
+		    margin: 0 0 15px 0;
+		}
+		.highlight {
+		    background: none repeat scroll 0 0 #FFFFFF;
+		}
+		.highlight pre,
+		pre {
+		    background-color: #F8F8F8;
+		    border: 1px solid #CCCCCC;
+		    border-radius: 3px 3px 3px 3px;
+		    font-size: 13px;
+		    line-height: 19px;
+		    overflow: auto;
+		    padding: 6px 10px;
+			white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
+		    white-space: -pre-wrap; /* Opera */
+		    white-space: -o-pre-wrap; /* Opera */
+		    white-space: pre-wrap; /* CSS3 - Text module (Candidate Recommendation) http://www.w3.org/TR/css3-text/#white-space */
+		    word-wrap: break-word; /* IE 5.5+ */
+		}
+		code, tt {
+		    background-color: #F8F8F8;
+		    border: 1px solid #EAEAEA;
+		    border-radius: 3px 3px 3px 3px;
+		    margin: 0 2px;
+		    padding: 0 5px;
+		}
+		pre, code, tt {
+		    font-family: Consolas,"Liberation Mono",Courier,monospace;
+		    font-size: 12px;
+		}
+		.highlight .c1 {
+		    color: #999988;
+		    font-style: italic;
+		}
+		.highlight .mi {
+		    color: #009999;
+		}
+		.highlight .cm {
+		    color: #999988;
+		    font-style: italic;
+		}
+		.highlight .kd,
+		.highlight .kr {
+		    font-weight: bold;
+		}
+		.highlight .o {
+		    font-weight: bold;
+		}
+		.highlight .k {
+		    font-weight: bold;
+		}
+		.highlight .nb {
+		    color: #0086B3;
+		}
+		.highlight .s1 {
+		    color: #DD1144;
+		}
+	</style>
+	
+</head>
+<body id="top">
+		
+	<div class="table-wrap">
+	<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+			<td class="title" style="width:20%"><a name="apis">API's</a></td>
+			<td class="example" style="width:80%">
+<ul>
+<li>
+<p>MediaEngine works within 3 API: JWPlayer API, Dailymotion API and Youtube API.</p>
+<p>
+	- These API's can be called by yourself or by the MediaEngine (by default):
+	<br><br><b>Inject Mode: Manual</b><br>In this mode, MediaEngine doesn't handle any ready API state events callbacks, and you need to be sure API's are loaded before <a href="#player-instantiation">player instantiation</a>.
+	<br><br><b>Inject Mode: Auto</b><br>In this mode, MediaEngine handle all ready API state events callbacks and players are stored in queue if API's aren't ready.
+	<br><br>- API's paths and API's inject mode can be configurated in <a href="#config">Config</a> section.
+	<br>- All API's aren't needed in order to work with the MediaEngine, you can work with one API only.
+</p>
+</li>
+
+</ul>
+			</td>				
+		</tr>
+		<tr>
+			<td class="title"><a name="player-instantiation">Player Instantiation</a</td>
+			<td class="example">
+<ul>
+	<li>
+<p>Each players has facultative options, see <a href="#links">Related Links</a> for each available parameters for each API's.</p>
+<p>- They're all native from the API, nothing is custom.
+	<br>- For each player, a list of default options is set, see <a href="#config">Config</a> section.
+	<br>- You can override these default options when initializing a new player, see <a href="#player-instantiation">Player Instantiation</a> section.
+</p>
+</li>
+<li>
+<p>How to initialize a player ?</p>
+
+<p>You don't need an ID to initialize a player, but a dom element is required. MediaEngine will generate an ID for each new player.<br>ID's are useful when you need to call methods on a specific player, see <a href="#media-engine-methods">MediaEngine methods</a>. But if you need to call a specific method from the API, the best way is to play with the api directly, see below.</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine.</span><span class="nb">initPlayer</span>(<span class="s1">where, type, options</span>);
+
+<span class="s1">where   </span> <span class="c1">// dom element, the player will replace it</span>
+<span class="s1">type    </span> <span class="c1">// string, can be "jwplayer, dmplayer or ytplayer"</span>
+<span class="s1">options </span> <span class="c1">// object, player options, each option override the default one</span>
+</pre></div>
+<p>callback:<br>- A callback can be attached within options, return an object.</p>
+<div class="highlight"><pre>
+<span class="kd">options.</span><span class="nb">callback</span> = <span class="kd">function</span>(<span class="s1">obj</span>) {
+     <span class="s1">obj</span>.api       <span class="c1">// player API</span>
+     <span class="s1">obj</span>.events    <span class="c1">// player events</span>
+};
+</pre></div>
+<p>you can then attach a custom event, see <a href="#api-events">API's Events</a>.</p>
+<div class="highlight"><pre>
+<span class="s1">obj</span>.events.addListener(<span class="s1">'onPlay'</span>, <span class="kd">function</span>(<span class="s1">e, args</span>){
+     <span class="s1">e.type</span>  <span class="c1">// event name</span>
+     <span class="s1">args</span>    <span class="c1">// player event arguments</span>
+});
+</pre></div>
+<p>..call a specific native API method..</p>
+<div class="highlight"><pre>
+ <span class="s1">obj</span>.api.<span class="kd">methodName();</span>
+</pre></div>
+<p>...or attach a specific native API event regarding the way you have to bind it ! (see <a href="#links">Related Links</a>)</p>
+</li>
+</ul>
+			</td>				
+		</tr>
+				<tr>
+			<td class="title"><a name="api-events">API's Events</a</td>
+			<td class="example">
+<ul>
+	<li>
+<p>Unlike options, MediaEngine tries to makes all API's events common. Each event fired by the MediaEnigine is custom and based on the native API event.</p>
+<p>- All of these options can be attached within the global <a href="#media-engine-events">MediaEngine Events</a> Dispatcher.
+	<br>- All of these events are not natives from the API, they are custom.
+</p>
+</li>
+<li>
+
+<p><b>JWPlayer Custom Events</b></p>
+<div class="highlight"><pre>
+[<span class="s1">'onReady', 'onSetupError','onPlaylist','onPlaylistItem','onPlaylistComplete',
+'onBufferChange','onPlay','onPause','onBuffer','onIdle','onComplete','onError',
+'onSeek','onMute','onVolume','onFullscreen','onResize','onQualityLevels',
+'onQualityChange','onCaptionsList','onCaptionsChange','onControls',
+'onDisplayClick','onAdClick','onAdCompanions','onAdComplete','onAdError',
+'onAdImpression','onAdSkipped','onBeforePlay','onBeforeComplete','onMeta'</span>]
+</pre></div>
+<p><em><b>Infos:</b>- natives events 'onTime' and 'onAdTime' are not fired by default because of recursive calls, there is no custom event fired for these events.</em></p>
+
+<p><b>Dailymotion Custom Events</b></p>
+<div class="highlight"><pre>
+[<span class="s1">'onReady', onPlay','onPlaying','onPause','onComplete',
+'onCanplay','onCanplaythrough','onProgress','onSeeking',
+'onSeek','onVolume','onDurationchange','onFullscreenchange','onError'</span>]
+</pre></div>
+<p><em><b>Infos:</b>- native event 'onTimeupdate' isn't fired by default because of recursive calls, there is no custom event fired for it.</em></p>
+
+<p><b>Youtube Custom Events</b></p>
+<div class="highlight"><pre>
+[<span class="s1">'onReady','onIdle','onPlay','onPause','onBuffer','onCued',
+'onComplete', onStateChange', 'onPlaybackQualityChange',
+'onPlaybackRateChange', 'onError', 'onApiChange'</span>]
+</pre></div>
+
+<p><b>All Commons API's events are:</b></p>
+<div class="highlight"><pre>
+[<span class="s1">'onReady', 'onPlay', 'onPause', 'onComplete', 'onError'</span>]
+</pre></div>
+
+</li>
+
+</ul>
+			</td>				
+		</tr>
+		<tr>
+			<td class="title"><a name="media-engine-events">MediaEngine Events</a</td>
+			<td class="example">
+<ul>
+<li>
+<p>A global dispatcher fire all API's custom events listed above, example:</p>
+
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">events</span>.addListener([<span class="s1">'APICustomEvent'</span>], <span class="kd">function</span>(<span class="s1">e, type, api, args</span>){
+     <span class="s1">e.type    </span> <span class="c1">// event name</span>
+     <span class="s1">type      </span> <span class="c1">// event player name</span>
+     <span class="s1">api       </span> <span class="c1">// player API</span>
+     <span class="s1">args      </span> <span class="c1">// player event arguments</span>
+});
+</pre></div>
+
+<p>example:</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">events</span>.addListener(<span class="s1">'onPlay'</span>, <span class="kd">function</span>(<span class="s1">e, type, api, args</span>){
+     <span class="c1">// ..all API's 'play' events are fired here</span>
+});
+</pre></div>
+
+<p>Other events fired:</p>
+<div class="highlight"><pre>
+['<span class="s1">onJwpAPIReady</span>']</span>      <span class="c1">// Fired when the JWPlayer API is loaded and ready.</span>
+['<span class="s1">onDailyAPIReady</span>']</span>    <span class="c1">// Fired when the Dailymotion API is loaded and ready.</span>
+['<span class="s1">onYoutubeAPIReady</span>']</span>  <span class="c1">// Fired when the Youtube API is loaded and ready.</span>
+</pre></div>
+<em><b>Infos:</b> - These events aren't fired in api 'inject' mode, see <a href="#apis">API's</a> section.
+</li>
+
+</ul>
+			</td>				
+		</tr>
+
+				<tr>
+			<td class="title"><a name="media-engine-methods">MediaEngine Methods</a</td>
+			<td class="example">
+<ul>
+<li>
+<p>MediaEngine has also his own methods too, listed below.<br>If you need more specific API method not listed here, you can attach methods from the API within the player initialization callback, see <a href="#player-instantiation">player instantiation</a>.</p>
+
+<p><b>play(<i>string</i>)</b><br>Play the player.</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">play</span>(<span class="s1">'playerId'</span>);
+</pre></div>
+
+<p><b>pause(<i>string</i>)</b><br>Pause the player.</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">pause</span>(<span class="s1">'playerId'</span>);
+</pre></div>
+
+<p><b>stop(<i>string</i>)</b><br>Stops the player and unloads the currently playing media file.<br><i>This method is not supported in Dailymotion player</i></p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">stop</span>(<span class="s1">'playerId'</span>);
+</pre></div>
+
+<p><b>seek(<i>string</i>,<i>number</i>)</b><br>Jump to the specified position within the currently playing item. The position is required and must be provided as an integer, in seconds. </p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">seek</span>(<span class="s1">'playerId'</span>, position);
+</pre></div>
+
+<p><b>mute(<i>string</i>,<i>boolean</i>)</b><br>Change the player's mute state (no sound). Mute the player if true, and unmute if false. </p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">mute</span>(<span class="s1">'playerId'</span>, state);
+</pre></div>
+
+<p><b>setVolume(<i>string</i>, <i>number</i>)</b><br>Sets the player's audio volume percentage, as a number between 0 and 100.</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">setVolume</span>(<span class="s1">'playerId'</span>, volume);
+</pre></div>
+
+<p><b>getDuration(<i>string</i>)</b><br>Returns the duration in seconds of the currently playing video. Note that getDuration() will return -1 until the video's metadata is loaded.<br><i>This method is not supported in Dailymotion player</i></p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">getDuration</span>(<span class="s1">'playerId'</span>);
+</pre></div>
+
+<p><b>getPosition(<i>string</i>)</b><br>Returns the current playback position in seconds, as a number.<br><i>This method is not supported in Dailymotion player</i></p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">getPosition</span>(<span class="s1">'playerId'</span>);
+</pre></div>
+
+<p><b>getVolume(<i>string</i>)</b><br>Returns the player's current volume, an integer between 0 and 100. Note that getVolume() will return the volume even if the player is muted.<br><i>This method is not supported in Dailymotion player</i></p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">getVolume</span>(<span class="s1">'playerId'</span>);
+</pre></div>
+
+<p><b>getItemMeta(<i>string</i>)</b><br>Returns the current playing item object metadatas.<br><i>This method is not supported in Dailymotion player</i></p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">getItemMeta</span>(<span class="s1">'playerId'</span>);
+</pre></div>
+
+<p><b>isMuted(<i>string</i>)</b><br>Returns true if the player is muted, false if not.<br><i>This method is not supported in Dailymotion player</i></p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">isMuted</span>(<span class="s1">'playerId'</span>);
+</pre></div>
+
+
+<br>
+
+<p><em><b>Infos:</b> - 'playerId' argument is the ID passed into the 'where' argument when calling MediaEngine.initPlayer().</p>
+
+</li>
+
+</ul>
+			</td>				
+		</tr>
+		<tr>
+			<td class="title"><a name="config">Config</a</td>
+			<td class="example">
+<ul>
+<li>
+<p>MediaEngine has a default config which is accessible to:</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine.</span><span class="nb">config</span>;
+</pre></div>
+<p>This config store an object for each API. Each object can contain the following params:</p>
+
+</li>
+
+<li>
+<p><b>Defaults API's Options:</b><br>You can easily modifying or accessing to the default options.<br>Data object structure is the same has native API.<br>Example for the Dailymotion API default options:</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine.</span><span class="nb">config</span>.<span class="nb">DMPlayer</span>.<span class="nb">defaultOptions</span>; <span class="c1">// access</span>
+<span class="kd">MediaEngine.</span><span class="nb">config</span>.<span class="nb">DMPlayer</span>.<span class="nb">defaultOptions</span>.<span class="nb">params</span>.<span class="nb">autoplay</span> = <span class="s1">1</span>; <span class="c1">// override</span>
+</pre></div>
+</li>
+
+<li>
+<p><b>API Path:</b><br>You can easily modifying or accessing to the default API path.<br><i>This only works when 'inject mode' is enabled.</i><br>Example for the Dailymotion API path:</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine.</span><span class="nb">config</span>.<span class="nb">DMPlayer</span>.<span class="nb">api</span>.<span class="nb">path</span> = <span class="s1">'http://my-new-api-path/'</span>; <span class="c1">// new path API</span>
+<span class="c1">
+// Default API Paths:
+// JWPLayer:    'jwplayer/jwplayer-6.7.4227/jwplayer.js'
+// DailyMotion: '//api.dmcdn.net/all.js'
+// YouTube:     '//www.youtube.com/iframe_api'</span>
+</pre></div>
+</li>
+
+<li>
+<p><b>API Inject Mode (true by default):</b><br>You can choose to inject by yourself the API.<br>Example for the Dailymotion API:</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine.</span><span class="nb">config</span>.<span class="nb">DMPlayer</span>.<span class="nb">api</span>.<span class="nb">inject</span> = false; <span class="c1">// Manual mode, API isn't injected</span>
+<span class="kd">MediaEngine.</span><span class="nb">config</span>.<span class="nb">DMPlayer</span>.<span class="nb">api</span>.<span class="nb">inject</span> = true; <span class="c1"> // Auto mode, API is injected by MediaEngine if needed</span>
+</pre></div>
+</li>
+
+</ul>
+			</td>				
+		</tr>
+		<tr>
+			<td class="title"><a name="ads">Advertising</a</td>
+			<td class="example">
+<ul>
+<li>
+ <p><b>JWPlayer</b></p>
+ <p>- A pre-roll and a post-roll tag can be added to JWPlayer. Example:</p>
+<div class="highlight"><pre>
+<span class="kd">jwPlayerOptions.</span><span class="nb">ads</span> = {
+     <span class="s1">'preroll'</span>: <span class="s1">'yourtag.xml'</span>,
+     <span class="s1">'postroll'</span>: <span class="s1">'yourtag.xml'</span>
+};
+</pre></div>
+
+<p><b>disableAds (false by default)</b><br>Within the <a href="#config">Config</a>, it's possible to disable all JWPlayer ads once (<i>even ads tags are set in options</i>) by editing the following boolean:</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine.</span><span class="nb">config</span>.<span class="nb">JWPlayer</span>.<span class="nb">disableAds</span> = true;
+</pre></div>
+
+</li>
+
+</ul>
+			</td>				
+		</tr>
+
+				<tr>
+			<td class="title"><a name="eStat">eStat</a</td>
+			<td class="example">
+<ul>
+<li>
+<p>MediaEngine has one stream stats tools called <b>"eStat"</b>.<br>
+<br>- eStat isn't called and loaded by the MediaEngine, you must call it by yourself. (Because of specifics params and specific way to implement it.)
+<br>- eStat is disabled by default.
+</p>
+
+<p><b>eStat levels</b><br>
+	- eStat levels aren't required but may be very useful for stats tracking.
+</p>
+<div class="highlight"><pre>
+{
+     <span class="s1">'eStatName'</span>     : <span class="s1">'player_name'</span>,      <span class="c1">// fallback to item filename if empty</span>
+     <span class="s1">'eStatSection1'</span> : <span class="s1">'player_level_1'</span>,   <span class="c1">// fallback to an empty string if empty</span>
+     <span class="s1">'eStatSection2'</span> : <span class="s1">'player_level_2'</span>,   <span class="c1">// fallback to an empty string if empty</span>
+     <span class="s1">'eStatSection3'</span> : <span class="s1">'player_level_3'</span>,   <span class="c1">// fallback to item type "AUDIO" or "VIDEO" if empty</span>
+     <span class="s1">'eStatSection4'</span> : <span class="s1">'player_level_4'</span>,   <span class="c1">// fallback to rendering mode "HTML5" or "FLASH" if empty</span>
+     <span class="s1">'eStatSection5'</span> : <span class="s1">'player_level_5'</span>,   <span class="c1">// fallback to an empty string if empty</span>
+     <span class="s1">'eStatGenre'</span>    : <span class="s1">'player_genre'</span>      <span class="c1">// fallback to an empty string if empty</span>
+}
+</pre></div>
+
+<p><b>Add eStat within jwplayer:</b></p>
+<div class="highlight"><pre>
+<span class="kd">jwPlayerOptions</span>.<span class="nb">eStat</span> = {
+     <span class="s1">'enabled'</span> : true, <span class="c1">// disable or enable eStat for this player</span>
+     <span class="s1">'live'</span>  : true,   <span class="c1">// enable/disable eStat live measurement for this player</span>
+     <span class="s1">'levels'</span>  : {}    <span class="c1">// custom eStat levels</span>
+};
+</pre></div>
+
+<p><b>Disable eStat (false by default)</b><br>Within the <a href="#config">Config</a>, it's possible to disable eStat (<i>even eStat is instantiated</i>) for all players by editing the following boolean:</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine.</span><span class="nb">config</span>.<span class="nb">eStat</span>.<span class="nb">disabled</span> = true;
+</pre></div>
+
+<p><b>attachPendingPlayers()</b><br>This method attach eStat for all pending players waiting for eStat API ready.<br>This is useful when you don't control eStat and player orders loading event.<br>If eStat is called synchonously and before players instantiation, you don't need to work with this method.</p><p><b>Example:</b> You set a player with eStat but eStat isn't loaded yet. The player is instantiated and ready but eStat will keep this player in a queue for attaching it later by calling this method, when api is ready.</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">eStat</span>.attachPendingPlayers();
+</pre></div>
+
+<p><b>attach(string, object)</b><br>This method attach eStat for a specific player.</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">eStat</span>.attach(<span class="s1">'playerId'</span>, levels); <span class="c1">// eStat is now attached</span>
+</pre></div>
+
+<p><b>detach(string)</b><br>This method detach eStat for a specific player.</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">eStat</span>.detach(<span class="s1">'playerId'</span>); <span class="c1">// eStat is now removed</span>
+</pre></div>
+
+<p><b>detachAll()</b><br>This method detach eStat for all players within eStat attached</p>
+<div class="highlight"><pre>
+<span class="kd">MediaEngine</span>.<span class="nb">eStat</span>.detachAll(); <span class="c1">// eStat is now removed from all players in current page</span>
+</pre></div>
+
+<br>
+
+<p><em><b>Infos:</b> - 'playerId' argument is the ID passed into the 'where' argument when calling MediaEngine.initPlayer().</p>
+
+</li>
+
+</ul>
+			</td>				
+		</tr>
+
+		<tr>
+			<td class="title"><a name="links">Related Links</a</td>
+			<td class="example">
+<ul>
+
+
+	<li><a href="http://www.longtailvideo.com/support/jw-player/">JWPlayer Options</a></li>
+	<li><a href="http://www.longtailvideo.com/support/jw-player/28851/javascript-api-reference">JWPlayer Events</a></li>
+	<li><a href="http://www.dailymotion.com/doc/api/player.html">Dailymotion Options</a></li>
+	<li><a href="http://www.dailymotion.com/doc/api/player.html">Dailymotion Events</a></li>
+	<li><a href="https://developers.google.com/youtube/player_parameters?playerVersion=HTML5">Youtube Options</a></li>
+	<li><a href="https://developers.google.com/youtube/iframe_api_reference#Events">Youtube Events</a></li>
+
+
+
+</ul>
+			</td>				
+		</tr>
+		</tbody>
+	</table>
+	</div>
+	<nav class="nav">
+		<h1 class="main-title">RTLnet Media Engine</h1>
+		<h2 class="sub-title">Version: 0.1.0</h2>
+		<h2 class="sub-title">Last Update: 18-12-2013</h2>
+		<ol>
+			<li><a href="#apis">API's</a></li>
+			<li><a href="#player-instantiation">Player Instantiation</a></li>
+			<li><a href="#api-events">API's Events</a></li>
+			<li><a href="#media-engine-events">MediaEngine Events</a></li>
+			<li><a href="#media-engine-methods">MediaEngine Methods</a></li>
+			<li><a href="#config">Config</a></li>
+			<li><a href="#ads">Advertising</a></li>
+			<li><a href="#eStat">eStat</a></li>
+			<li><a href="#links">Related Links</a></li>
+		</ol>
+		<a href="#top">TOP [⬆]</a>
+	</nav>
+</body>
+</html>

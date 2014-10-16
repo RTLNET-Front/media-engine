@@ -86,7 +86,7 @@ Unlike options, MediaEngine tries to makes all APIs events common. Each event fi
     
 ####Other events fired:
 
-    ['onJwpAPIReady']      // Fired when the JWPlayer API is loaded and ready.
+    ['onJwpAPIReady']      // Fired when the JW Player API is loaded and ready.
     ['onDailyAPIReady']    // Fired when the Dailymotion API is loaded and ready.
     ['onYoutubeAPIReady']  // Fired when the Youtube API is loaded and ready.
 **Infos** : - These events aren't fired in api 'inject' mode, see API's section.    
@@ -184,7 +184,7 @@ You can easily modifying or accessing to the default API path. This only works w
     MediaEngine.config.DMPlayer.api.path = 'http://new-path-api/';
 
 ###Default API Paths:
-- **JWPLayer:**:    'jwplayer/jwplayer-6.7.4227/jwplayer.js'
+- **JW PLayer:**    'jwplayer/jwplayer-6.7.4227/jwplayer.js'
 - **DailyMotion:** '//api.dmcdn.net/all.js'
 - **YouTube:**     '//www.youtube.com/iframe_api'
 
@@ -197,9 +197,9 @@ You can choose to inject by yourself the API.
     MediaEngine.config.DMPlayer.api.inject = true;  // Auto mode, API is injected by MediaEngine if needed
     
 ##Advertising   
-*(JWPlayer Only)*
+*(JW Player Only)*
 
-A pre-roll and a post-roll tag can be added to JWPlayer by passing an "ads" property to JWPlayer instantiation options.
+A pre-roll and a post-roll tag can be added to JW Player by passing an "ads" property to JW Player instantiation options.
 *(These options are corresponding to the options object configuration using MediaEngine.initPlayer() method, see Player Instantiation section)*
 
     options.ads = {
@@ -270,8 +270,8 @@ Within the Config, it's possible to disable eStat (even eStat is instantiated) f
 
 ##Related Links 
 
-- JWPlayer Options : http://www.longtailvideo.com/support/jw-player/
-- JWPlayer Events : http://www.longtailvideo.com/support/jw-player/28851/javascript-api-reference
+- JW Player Options : http://www.longtailvideo.com/support/jw-player/
+- JW Player Events : http://www.longtailvideo.com/support/jw-player/28851/javascript-api-reference
 - Dailymotion Options : http://www.dailymotion.com/doc/api/player.html
 - Dailymotion Events : http://www.dailymotion.com/doc/api/player.html
 - Youtube Options : https://developers.google.com/youtube/player_parameters?playerVersion=HTML5

@@ -1,7 +1,7 @@
 #media-engine
 --------------
 
-**MediaEngine** works within **3 API** : JW Player API, Dailymotion API and Youtube API.
+**MediaEngine** works within **3 APIs** : JW Player API, Dailymotion API and Youtube API.
 
 APIs can be included by yourself or by the MediaEngine (this is the default behavior):
 

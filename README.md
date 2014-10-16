@@ -199,7 +199,7 @@ You can choose to inject by yourself the API.
     
 #Advertising	
 
-** *JWPlayer Only* **
+*JWPlayer Only*
 
 * A pre-roll and a post-roll tag can be added to JWPlayer. 
 

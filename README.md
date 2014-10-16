@@ -248,21 +248,21 @@ Within the Config, it's possible to disable eStat (even eStat is instantiated) f
 
     MediaEngine.config.eStat.disabled = true;
 
-** attachPendingPlayers()** // This method attach eStat for all pending players waiting for eStat API ready. This is useful when you don't control eStat and player orders loading event. If eStat is called synchonously and before players instantiation, you don't need to work with this method.
+**attachPendingPlayers()** // This method attach eStat for all pending players waiting for eStat API ready. This is useful when you don't control eStat and player orders loading event. If eStat is called synchonously and before players instantiation, you don't need to work with this method.
 
 ** *Example* ** : You set a player with eStat but eStat isn't loaded yet. The player is instantiated and ready but eStat will keep this player in a queue for attaching it later by calling this method, when api is ready.
 
     MediaEngine.eStat.attachPendingPlayers();
     
-** attach(string, object) ** // This method attach eStat for a specific player.
+**attach(string, object) ** // This method attach eStat for a specific player.
 
     MediaEngine.eStat.attach('playerId', levels); // eStat is now attached
 
-** detach(string)** // This method detach eStat for a specific player.
+**detach(string)** // This method detach eStat for a specific player.
 
     MediaEngine.eStat.detach('playerId'); // eStat is now removed
 
-** detachAll()** // This method detach eStat for all players within eStat attached
+**detachAll()** // This method detach eStat for all players within eStat attached
 
     MediaEngine.eStat.detachAll(); // eStat is now removed from all players in current page
 

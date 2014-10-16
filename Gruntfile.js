@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 				mangle: true,
 				compress: true,
 				report: 'gzip',
-				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) 2014 RTLnet */\n'
+				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | RTLnet */\n'
 			}
 		}
 	});

@@ -1,5 +1,5 @@
 {
-  "name": "MediaEngine",
+  "name": "media-engine",
   "version": "1.1.2",
   "private": false,
   "devDependencies": {

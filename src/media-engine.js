@@ -1,17 +1,8 @@
 /*!
- * RTLnet JavaScript Media Engine
- *
+ * RTLnet JavaScript media-engine
  * version: 1.1.2
- *
  * description: manage players objects and work with player's API
- *
- * Last update: 25-09-2014
- *
- * What's new:
- * Fix getPos issue param on polling in eStat
- *
  */
-
 (function(window){
 
 	// public vars
@@ -469,7 +460,6 @@
 	requires : [eStat >= 4.0.36]
 	...
 	*/
-
 	function JWPlayerEstat(jwp, params, typeLive){
 
 		this.jwp 				= jwp;
@@ -632,7 +622,6 @@
 	requires : [eStat >= 4.0.36]
 	...
 	*/
-
 	var eStat = {
 
 		attachPendingPlayers : function(){

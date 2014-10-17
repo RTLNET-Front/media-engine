@@ -32,7 +32,7 @@ You don't need an ID to initialize a player, but a DOM Element is required. Medi
 But if you need to call a specific method from the API, the best way is to play with the api directly, see below:
 
 ```javascript
-MediaEngine.initPlayer(where, type, options);
+MediaEngine.initPlayer(where, 'type', options);
 ```
 
 - **where**   : *(DOM Element)*, this element will be replaced.

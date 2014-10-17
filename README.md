@@ -104,8 +104,8 @@ Unlike options, MediaEngine tries to makes all APIs events common. Each event fi
 
 ```javascript
 ['onJwpAPIReady']      // Fired when the JW Player API is loaded and ready.
-    ['onDailyAPIReady']    // Fired when the Dailymotion API is loaded and ready.
-    ['onYoutubeAPIReady']  // Fired when the Youtube API is loaded and ready.
+['onDailyAPIReady']    // Fired when the Dailymotion API is loaded and ready.
+['onYoutubeAPIReady']  // Fired when the Youtube API is loaded and ready.
 ```
 
 **Infos** : - These events aren't fired in api 'inject' mode, see API's section.    
@@ -208,8 +208,8 @@ MediaEngine.isMuted('playerId');
 MediaEngine has a default config which is accessible through a console to:
 
 ```javascript
- MediaEngine.config;
- ```
+MediaEngine.config;
+```
 
 This config store an object for each API. Each object can contain the following params:
 
